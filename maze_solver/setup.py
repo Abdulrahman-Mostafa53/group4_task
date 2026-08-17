@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'action = robot_control.ultrasonic_node:main'
         ],
     },
 )

@@ -12,7 +12,24 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "action/MoveX.action"
   "action/Yaw.action"
+  "srv/Error.srv"
 )
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Num.msg"
+  "srv/Error.srv"
+ )
+
+
+
+
+
+
+
+
+
+
 
 
 # uncomment the following section in order to fill in

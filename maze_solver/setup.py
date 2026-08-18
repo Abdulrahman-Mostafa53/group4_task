@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'action = maze_solver.action_client:main'
+            'action = maze_solver.action_client:main',
+            'move_x_action_server = maze_solver.movex_action_server:main'
         ],
     },
 )

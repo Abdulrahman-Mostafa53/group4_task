@@ -15,6 +15,7 @@ class MoveXActionServer(Node):
     # Constructor method to initialize node, ROS 2 communication interfaces, and state variables
     def __init__(self):
         # Initialize the node with the name 'move_x_action_server'
+        self.get_logger().info('Executing goal: Moving forward...')
         super().__init__('move_x_action_server')
 
         # Create the Action Server for handling linear movement goals

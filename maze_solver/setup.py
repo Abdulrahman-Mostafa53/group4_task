@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'action = robot_control.ultrasonic_node:main'
+            'action = maze_solver.action_client:main'
         ],
     },
 )

@@ -1,9 +1,9 @@
-# goal
-
+# Goal
+string direction    # "left" or "right"
 ---
-
-# result
-
+# Result
+bool success
+string final_direction
 ---
-
-# feedback
+# Feedback
+float32 current_yaw

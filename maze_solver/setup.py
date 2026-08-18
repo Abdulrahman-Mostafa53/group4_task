@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'action = maze_solver.action_client:main'
         ],
     },
 )

@@ -5,8 +5,8 @@ from rclpy.node import Node
 from rclpy.action import ActionServer
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
-from my_robot_interfaces.action import MoveX
-from my_robot_interfaces.srv import Error
+from maze_interfaces.action import MoveX
+from maze_interfaces.srv import Error
 
 
 # Define and initialize the MoveX Action Server node class

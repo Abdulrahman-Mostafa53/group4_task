@@ -1,0 +1,65 @@
+[1.932s] Invoking command in '/home/abdulrahman/training_ws/src/group4_task/maze_control': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_control build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log --install-scripts $base/lib/maze_control --single-version-externally-managed install_data
+[2.168s] /usr/lib/python3/dist-packages/setuptools/dist.py:744: SetuptoolsDeprecationWarning: Invalid dash-separated options
+[2.168s] !!
+[2.168s] 
+[2.169s]         ********************************************************************************
+[2.169s]         Usage of dash-separated 'script-dir' will not be supported in future
+[2.169s]         versions. Please use the underscore name 'script_dir' instead.
+[2.169s] 
+[2.169s]         This deprecation is overdue, please update your project and remove deprecated
+[2.169s]         calls to avoid build errors in the future.
+[2.170s] 
+[2.170s]         See https://setuptools.pypa.io/en/latest/userguide/declarative_config.html for details.
+[2.170s]         ********************************************************************************
+[2.170s] 
+[2.170s] !!
+[2.170s]   opt = self.warn_dash_deprecation(opt, section)
+[2.446s] running egg_info
+[2.447s] creating ../build/maze_control/maze_control.egg-info
+[2.484s] writing ../build/maze_control/maze_control.egg-info/PKG-INFO
+[2.484s] writing dependency_links to ../build/maze_control/maze_control.egg-info/dependency_links.txt
+[2.485s] writing entry points to ../build/maze_control/maze_control.egg-info/entry_points.txt
+[2.485s] writing requirements to ../build/maze_control/maze_control.egg-info/requires.txt
+[2.485s] writing top-level names to ../build/maze_control/maze_control.egg-info/top_level.txt
+[2.485s] writing manifest file '../build/maze_control/maze_control.egg-info/SOURCES.txt'
+[2.568s] reading manifest file '../build/maze_control/maze_control.egg-info/SOURCES.txt'
+[2.569s] writing manifest file '../build/maze_control/maze_control.egg-info/SOURCES.txt'
+[2.569s] running build
+[2.569s] running build_py
+[2.570s] creating /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build
+[2.570s] creating /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib
+[2.570s] creating /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control
+[2.570s] copying maze_control/maze_timer_node.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control
+[2.571s] copying maze_control/wall_retraction_service.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control
+[2.571s] copying maze_control/__init__.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control
+[2.571s] running install
+[2.583s] running install_lib
+[2.622s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control
+[2.622s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control/maze_timer_node.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control
+[2.623s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control/wall_retraction_service.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control
+[2.623s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build/lib/maze_control/__init__.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control
+[2.623s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control/maze_timer_node.py to maze_timer_node.cpython-312.pyc
+[2.625s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control/wall_retraction_service.py to wall_retraction_service.cpython-312.pyc
+[2.627s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control/__init__.py to __init__.cpython-312.pyc
+[2.627s] running install_data
+[2.627s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/ament_index
+[2.628s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/ament_index/resource_index
+[2.628s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/ament_index/resource_index/packages
+[2.628s] copying resource/maze_control -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/ament_index/resource_index/packages
+[2.629s] copying package.xml -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control
+[2.629s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/launch
+[2.629s] copying launch/maze_simulation_tb3.launch.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/launch
+[2.629s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/worlds
+[2.629s] copying worlds/maze_world.sdf -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/worlds
+[2.631s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/config
+[2.631s] copying config/bridge_config.yaml -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/config
+[2.631s] copying config/gui.config -> /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/config
+[2.632s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/models
+[2.632s] creating /home/abdulrahman/training_ws/src/group4_task/install/maze_control/share/maze_control/models/simple_robot
+[2.632s] running install_egg_info
+[2.680s] Copying ../build/maze_control/maze_control.egg-info to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control-0.1.0-py3.12.egg-info
+[2.682s] running install_scripts
+[2.937s] Installing maze_timer_node script to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/maze_control
+[2.937s] Installing wall_retraction_service script to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/maze_control
+[2.937s] writing list of installed files to '/home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log'
+[2.999s] Invoked command in '/home/abdulrahman/training_ws/src/group4_task/maze_control' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_control build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log --install-scripts $base/lib/maze_control --single-version-externally-managed install_data

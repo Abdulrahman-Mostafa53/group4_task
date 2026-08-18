@@ -15,7 +15,6 @@ class MoveXActionServer(Node):
     # Constructor method to initialize node, ROS 2 communication interfaces, and state variables
     def __init__(self):
         # Initialize the node with the name 'move_x_action_server'
-        self.get_logger().info('Executing goal: Moving forward...')
         super().__init__('move_x_action_server')
 
         # Create the Action Server for handling linear movement goals
@@ -102,7 +101,7 @@ class MoveXActionServer(Node):
         target_distance = goal_handle.request.target_distance    
         
         # Set movement speed locally to 1.0
-        speed = 1.0  
+        speed = 0.5  
         
         # Record starting position
         start_x = self.current_x

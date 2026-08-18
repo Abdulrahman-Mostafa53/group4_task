@@ -119,10 +119,10 @@ class MazeSolver(Node):
                 'movement_x failed.'
             )
 
-    def move_yaw(self, angle):
+    def move_yaw(self, direction):
 
         goal_msg = Yaw.Goal()
-        goal_msg.angle = angle
+        goal_msg.direction = direction
 
         self.movement_yaw_client.wait_for_server()
 
@@ -170,24 +170,20 @@ class MazeSolver(Node):
 def solve_maze():
     wall_node = WallServiceClient()
     motion_node = MazeSolver()
-    motion_node.move_x(30.0)
-
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
+    motion_node.move_yaw("left")
+    sleep(10)
+    # wall_node.toggle_walls(True)
+    sleep(2)
+    motion_node.move_x(1)
+    sleep(5)
+    # wall_node.toggle_walls(False)
+    sleep(5)
+    motion_node.move_x(2.5)
+    sleep(5)
+    # motion_node.move_yaw("right")
+    # sleep(5)
+    motion_node.move_x(30)
+    sleep(10)
     wall_node.destroy_node()
     motion_node.destroy_node()
 

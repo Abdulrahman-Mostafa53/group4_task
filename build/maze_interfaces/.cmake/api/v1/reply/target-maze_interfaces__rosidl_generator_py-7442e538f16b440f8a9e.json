@@ -647,16 +647,16 @@
 	"dependencies" : 
 	[
 		{
+			"backtrace" : 75,
+			"id" : "maze_interfaces__py::@271d9de9860e49d713f8"
+		},
+		{
 			"backtrace" : 10,
 			"id" : "maze_interfaces__rosidl_generator_c::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 75,
 			"id" : "maze_interfaces__rosidl_typesupport_c::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 75,
-			"id" : "maze_interfaces__py::@271d9de9860e49d713f8"
 		}
 	],
 	"id" : "maze_interfaces__rosidl_generator_py::@6890427a1f51a3e7e1df",

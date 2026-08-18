@@ -17,3 +17,4 @@
 /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver-0.0.0-py3.12.egg-info/SOURCES.txt
 /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver/action
 /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver/move_x_action_server
+/home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver/move_yaw_action_server

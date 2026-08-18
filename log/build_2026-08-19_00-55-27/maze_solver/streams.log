@@ -1,0 +1,32 @@
+[2.447s] Invoking command in '/home/abdulrahman/training_ws/src/group4_task/maze_solver': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_solver/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_solver build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/install.log --install-scripts $base/lib/maze_solver --single-version-externally-managed install_data
+[3.127s] running egg_info
+[3.179s] writing ../build/maze_solver/maze_solver.egg-info/PKG-INFO
+[3.180s] writing dependency_links to ../build/maze_solver/maze_solver.egg-info/dependency_links.txt
+[3.180s] writing entry points to ../build/maze_solver/maze_solver.egg-info/entry_points.txt
+[3.180s] writing requirements to ../build/maze_solver/maze_solver.egg-info/requires.txt
+[3.181s] writing top-level names to ../build/maze_solver/maze_solver.egg-info/top_level.txt
+[3.283s] reading manifest file '../build/maze_solver/maze_solver.egg-info/SOURCES.txt'
+[3.284s] writing manifest file '../build/maze_solver/maze_solver.egg-info/SOURCES.txt'
+[3.285s] running build
+[3.285s] running build_py
+[3.285s] copying maze_solver/yaw_action_server.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver
+[3.286s] copying maze_solver/action_client.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver
+[3.286s] copying maze_solver/movex_action_server.py -> /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver
+[3.286s] running install
+[3.295s] running install_lib
+[3.336s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver/yaw_action_server.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver
+[3.336s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver/action_client.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver
+[3.337s] copying /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build/lib/maze_solver/movex_action_server.py -> /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver
+[3.338s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver/yaw_action_server.py to yaw_action_server.cpython-312.pyc
+[3.341s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver/action_client.py to action_client.cpython-312.pyc
+[3.343s] byte-compiling /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver/movex_action_server.py to movex_action_server.cpython-312.pyc
+[3.344s] running install_data
+[3.345s] running install_egg_info
+[3.384s] removing '/home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver-0.0.0-py3.12.egg-info' (and everything under it)
+[3.385s] Copying ../build/maze_solver/maze_solver.egg-info to /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages/maze_solver-0.0.0-py3.12.egg-info
+[3.387s] running install_scripts
+[3.624s] Installing action script to /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver
+[3.624s] Installing move_x_action_server script to /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver
+[3.625s] Installing move_yaw_action_server script to /home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/maze_solver
+[3.625s] writing list of installed files to '/home/abdulrahman/training_ws/src/group4_task/build/maze_solver/install.log'
+[3.675s] Invoked command in '/home/abdulrahman/training_ws/src/group4_task/maze_solver' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_solver/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_solver/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_solver build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_solver/install.log --install-scripts $base/lib/maze_solver --single-version-externally-managed install_data

@@ -2,6 +2,10 @@ import rclpy
 from rclpy.node import Node
 from std_srvs.srv import SetBool
 from time import sleep
+from maze_interfaces.action import MoveX
+from maze_interfaces.action import Yaw
+from rclpy.action import ActionClient
+
 
 class WallServiceClient(Node):
 
@@ -51,27 +55,140 @@ class WallServiceClient(Node):
                 f'Service call failed: {e}'
             )
 
+class MazeSolver(Node):
+    def __init__(self):
+        super().__init__('maze_solver')
+
+        self.movement_x_client = ActionClient(
+            self,
+            MoveX,
+            'move_x'
+        )
+
+        self.movement_yaw_client = ActionClient(
+            self,
+            Yaw,
+            'move_yaw'
+        )
+
+    def move_x(self, distance):
+        self.get_logger().info("ffffff")
+        goal_msg = MoveX.Goal()
+        goal_msg.target_distance = distance
+
+        self.movement_x_client.wait_for_server()
+        self.get_logger().info("ffffff")
+        future = self.movement_x_client.send_goal_async(
+            goal_msg
+        )
+
+        future.add_done_callback(
+            self.movement_x_goal_response
+        )
+
+    def movement_x_goal_response(self, future):
+
+        goal_handle = future.result()
+
+        if not goal_handle.accepted:
+            self.get_logger().error(
+                'movement_x goal was rejected.'
+            )
+            return
+
+        self.get_logger().info(
+            'movement_x goal was accepted.'
+        )
+
+        result_future = goal_handle.get_result_async()
+
+        result_future.add_done_callback(
+            self.movement_x_result
+        )
+
+    def movement_x_result(self, future):
+
+        result = future.result().result
+
+        if result.success:
+            self.get_logger().info(
+                'movement_x completed successfully.'
+            )
+        else:
+            self.get_logger().error(
+                'movement_x failed.'
+            )
+
+    def move_yaw(self, direction):
+
+        goal_msg = Yaw.Goal()
+        goal_msg.direction = direction
+
+        self.movement_yaw_client.wait_for_server()
+
+        future = self.movement_yaw_client.send_goal_async(
+            goal_msg
+        )
+
+        future.add_done_callback(
+            self.movement_yaw_goal_response
+        )
+
+    def movement_yaw_goal_response(self, future):
+
+        goal_handle = future.result()
+
+        if not goal_handle.accepted:
+            self.get_logger().error(
+                'movement_yaw goal was rejected.'
+            )
+            return
+
+        self.get_logger().info(
+            'movement_yaw goal was accepted.'
+        )
+
+        result_future = goal_handle.get_result_async()
+
+        result_future.add_done_callback(
+            self.movement_yaw_result
+        )
+
+    def movement_yaw_result(self, future):
+
+        result = future.result().result
+
+        if result.success:
+            self.get_logger().info(
+                'movement_yaw completed successfully.'
+            )
+        else:
+            self.get_logger().error(
+                'movement_yaw failed.'
+            )
+
 def solve_maze():
     wall_node = WallServiceClient()
+    motion_node = MazeSolver()
+    motion_node.move_yaw("left")
+    sleep(2)
     wall_node.toggle_walls(True)
+    sleep(1.5)
+    motion_node.move_x(1.5)
     sleep(1)
     wall_node.toggle_walls(False)
     sleep(1)
-    wall_node.toggle_walls(True)
+    motion_node.move_x(0.3)
     sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
-    wall_node.toggle_walls(True)
-    sleep(1)
-    wall_node.toggle_walls(False)
-    sleep(1)
+    motion_node.move_yaw("right")
+    sleep(1.8)
+    motion_node.move_x(50.0)
+    sleep(10)
     wall_node.destroy_node()
+    motion_node.destroy_node()
 
 def main():
     rclpy.init()
+    sleep(5)
     solve_maze()
     rclpy.shutdown()

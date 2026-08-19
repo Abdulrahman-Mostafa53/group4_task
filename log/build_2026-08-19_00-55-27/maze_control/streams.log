@@ -1,0 +1,37 @@
+[2.336s] Invoking command in '/home/abdulrahman/training_ws/src/group4_task/maze_control': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_control build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log --install-scripts $base/lib/maze_control --single-version-externally-managed install_data
+[2.630s] /usr/lib/python3/dist-packages/setuptools/dist.py:744: SetuptoolsDeprecationWarning: Invalid dash-separated options
+[2.630s] !!
+[2.630s] 
+[2.630s]         ********************************************************************************
+[2.630s]         Usage of dash-separated 'script-dir' will not be supported in future
+[2.630s]         versions. Please use the underscore name 'script_dir' instead.
+[2.630s] 
+[2.631s]         This deprecation is overdue, please update your project and remove deprecated
+[2.631s]         calls to avoid build errors in the future.
+[2.631s] 
+[2.631s]         See https://setuptools.pypa.io/en/latest/userguide/declarative_config.html for details.
+[2.631s]         ********************************************************************************
+[2.631s] 
+[2.631s] !!
+[2.631s]   opt = self.warn_dash_deprecation(opt, section)
+[3.009s] running egg_info
+[3.064s] writing ../build/maze_control/maze_control.egg-info/PKG-INFO
+[3.064s] writing dependency_links to ../build/maze_control/maze_control.egg-info/dependency_links.txt
+[3.065s] writing entry points to ../build/maze_control/maze_control.egg-info/entry_points.txt
+[3.065s] writing requirements to ../build/maze_control/maze_control.egg-info/requires.txt
+[3.066s] writing top-level names to ../build/maze_control/maze_control.egg-info/top_level.txt
+[3.171s] reading manifest file '../build/maze_control/maze_control.egg-info/SOURCES.txt'
+[3.173s] writing manifest file '../build/maze_control/maze_control.egg-info/SOURCES.txt'
+[3.173s] running build
+[3.174s] running build_py
+[3.174s] running install
+[3.188s] running install_lib
+[3.242s] running install_data
+[3.243s] running install_egg_info
+[3.299s] removing '/home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control-0.1.0-py3.12.egg-info' (and everything under it)
+[3.300s] Copying ../build/maze_control/maze_control.egg-info to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages/maze_control-0.1.0-py3.12.egg-info
+[3.303s] running install_scripts
+[3.638s] Installing maze_timer_node script to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/maze_control
+[3.638s] Installing wall_retraction_service script to /home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/maze_control
+[3.639s] writing list of installed files to '/home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log'
+[3.708s] Invoked command in '/home/abdulrahman/training_ws/src/group4_task/maze_control' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/abdulrahman/training_ws/src/group4_task/build/maze_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/abdulrahman/training_ws/src/group4_task/install/maze_control/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/maze_control build --build-base /home/abdulrahman/training_ws/src/group4_task/build/maze_control/build install --record /home/abdulrahman/training_ws/src/group4_task/build/maze_control/install.log --install-scripts $base/lib/maze_control --single-version-externally-managed install_data

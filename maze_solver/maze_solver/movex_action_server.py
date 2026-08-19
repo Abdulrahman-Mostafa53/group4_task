@@ -1,181 +1,175 @@
-import time
 import math
+import time
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
+from rclpy.callback_groups import ReentrantCallbackGroup
+from rclpy.executors import MultiThreadedExecutor
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from maze_interfaces.action import MoveX
 from maze_interfaces.srv import Error
 
 
-# Define and initialize the MoveX Action Server node class
 class MoveXActionServer(Node):
 
-    # Constructor method to initialize node, ROS 2 communication interfaces, and state variables
     def __init__(self):
-        # Initialize the node with the name 'move_x_action_server'
         super().__init__('move_x_action_server')
+        self.last_odm_time = self.get_clock().now()
+        # Use ReentrantCallbackGroup to allow concurrent execution of callbacks and actions
+        self.callback_group = ReentrantCallbackGroup()
 
-        # Create the Action Server for handling linear movement goals
+        # Create the Action Server with reentrant callback group
         self._action_server = ActionServer(
             self,
             MoveX,
             'move_x',
-            self.execute_callback
+            self.execute_callback,
+            callback_group=self.callback_group
         )
 
-        # Create Publisher to send velocity commands to the robot
+        # Create Publisher
         self.publisher_ = self.create_publisher(
             Twist, 
             '/cmd_vel', 
             10
         )
 
-        # Create Subscriber to continuously monitor robot odometry
+        # Create Subscriber using the same callback group for multi-threading access
         self.subscription = self.create_subscription(
             Odometry,
             '/odom',
             self.odom_callback,
-            10
+            10,
+            callback_group=self.callback_group
         )
 
-        # Variables to track the robot's current position on the X axis
+        # Variables to track position
         self.current_x = 0.0
         self.current_y = 0.0
         
-        # Create Service Server to handle manual stop requests
+        # Create Service Server
         self.srv = self.create_service(
             Error,
             'stop_robot',
-            self.stop_robot_callback
+            self.stop_robot_callback,
+            callback_group=self.callback_group
         )
         
-        # Log node startup and readiness status
-        self.get_logger().info('MoveX Action Server & Stop Robot Service initialized.')
+        self.get_logger().info('MoveX MultiThreaded Action Server initialized.')
 
-    # Helper function to stop the robot motion immediately and reset position tracking
     def execute_stop(self):
-        # Prepare a zero-velocity Twist message
         twist = Twist()
         twist.linear.x = 0.0
-        
-        # Publish zero velocity to stop the robot
+        twist.angular.z = 0.0
         self.publisher_.publish(twist)
-        
-        # Reset the current X coordinate tracker
-        self.current_x = 0.0
 
-    # Service callback function to process incoming emergency stop requests
     def stop_robot_callback(self, request, response):
-        # Check if the incoming request flag is set to True
         if request.stop:
-            # Stop the robot and log status message
             self.execute_stop()
-            self.get_logger().info('Robot stopped and distance counter reset!')
-            
-            # Prepare positive service response
+            self.get_logger().info('Robot stopped successfully via service!')
             response.success = True
-            response.message = 'Robot stopped successfully and counter reset.'
-        # If the stop flag is False, take no action
+            response.message = 'Robot stopped successfully.'
         else:
             self.get_logger().info('Received stop request as False, doing nothing.')
-            
-            # Prepare negative service response
             response.success = False
             response.message = 'Stop request was False, no action taken.'
-
         return response
 
-    # Odometry callback function to continuously update current X position
     def odom_callback(self, msg):
-        # Store current X position from incoming odometry message
+        # This will now run freely in parallel thanks to MultiThreadedExecutor
+        self.last_odm_time = self.get_clock().now()
         self.current_x = msg.pose.pose.position.x
         self.current_y = msg.pose.pose.position.y
 
-   # Main action server callback function to execute linear movement towards target distance
     def execute_callback(self, goal_handle):
         self.get_logger().info('Executing goal: Moving forward...')
         
-        # Extract target distance from goal request
         target_distance = goal_handle.request.target_distance    
+        speed = 800.0
         
-        # Set movement speed locally to 1.0
-        speed = 1.0  
-        
-        # Record starting position
         start_x = self.current_x
         start_y = self.current_y
         
-        # Initialize feedback message container
         feedback_msg = MoveX.Feedback()
-
-        # Prepare movement velocity message
         twist = Twist()
         twist.linear.x = speed
+        twist.angular.z = 0.0
 
-        # Initialize distance_traveled variable before loop
         distance_traveled = 0.0
 
-        # Control loop: Keep moving while node is active and target distance is not reached
+        start_time=self.get_clock().now()
+        # max time 
+        TimeOut_duration=15.0
         while rclpy.ok() and (distance_traveled < target_distance):
-            # Calculate total distance traveled so far using Euclidean distance
+            result = MoveX.Result()
+            # Read continuously updated coordinates safely in parallel
+            current_time = self.get_clock().now()
+
+            #### EDGE CASE "MISSING /odm "
+            last_time_odm_Msg=(current_time - self.last_odm_time).nanoseconds/1e9 #convert to sec
+            if last_time_odm_Msg > 2.0 : # 2 sec pass 
+               self.get_logger().info('Missing /odom....')
+               self.execute_stop()
+               # change status of goal
+               goal_handle.abort()
+       
+               result.success = False
+               result.final_distance = distance_traveled
+               return result
+            
+            ### EDGE CASE "Time Out"
+            passed_time = (current_time - start_time).nanoseconds /1e9
+            if passed_time > TimeOut_duration :  ## per goal
+                self.get_logger().info('TIME OUT!...')
+                self.execute_stop()
+                goal_handle.abort()
+                result.success = False
+                result.final_distance = distance_traveled
+                return result
             distance_traveled = math.sqrt((self.current_x - start_x) ** 2 + (self.current_y - start_y) ** 2)
 
-            # Publish current feedback to client
             feedback_msg.current_distance_traveled = distance_traveled
             goal_handle.publish_feedback(feedback_msg)
 
-            # Check if action cancellation was requested by client
             if goal_handle.is_cancel_requested:
                 self.get_logger().info('Goal canceled.')
-                
-                # Stop robot movement
                 self.execute_stop()
                 
-                # Prepare and return canceled result
                 result = MoveX.Result()
                 result.success = False
                 result.final_distance = distance_traveled
                 return result
 
-            # Publish movement velocity command to robot
             self.publisher_.publish(twist)
             
-            # Short sleep delay to control publication loop rate
+            # Safe sleep that doesn't block the odom subscriber anymore!
             time.sleep(0.05)
 
-        # Stop robot after reaching target distance
         self.execute_stop()
-        
-        # Mark goal execution as successful
         goal_handle.succeed()   
 
-        # Prepare and return final result
         result = MoveX.Result()
         result.success = True
-        result.final_distance = distance_traveled  # استخدام المسافة الحقيقية المحسوبة
+        result.final_distance = distance_traveled  
         self.get_logger().info(f'Target distance reached: {result.final_distance:.2f}m')
         return result
 
-# Main function to initialize ROS 2 communication, create node, and spin execution
+
 def main():
-    # Initialize ROS 2 communication
     rclpy.init()
-    
-    # Instantiate the node
     move_x_action_server = MoveXActionServer()
     
-    # Keep node alive to process callbacks and requests
-    rclpy.spin(move_x_action_server)
+    # Use MultiThreadedExecutor to handle multiple threads safely (Odom vs Action Loop)
+    executor = MultiThreadedExecutor(num_threads=4)
+    executor.add_node(move_x_action_server)
     
-    # Destroy node explicitly when spinning stops
-    move_x_action_server.destroy_node()
-    
-    # Shutdown ROS 2 communication
-    rclpy.shutdown()
+    try:
+        executor.spin()
+    finally:
+        move_x_action_server.destroy_node()
+        rclpy.shutdown()
 
 
-# Entry point execution guard
 if __name__ == '__main__':
     main()

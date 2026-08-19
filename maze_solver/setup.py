@@ -10,6 +10,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + "/launch", ['launch/launch_maze_solver.launch.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,7 +25,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'action = maze_solver.action_client:main'
+            'action = maze_solver.action_client:main',
+            'move_x_action_server = maze_solver.movex_action_server:main',
+            'move_yaw_action_server = maze_solver.yaw_action_server:main'
         ],
     },
 )

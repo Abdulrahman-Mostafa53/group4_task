@@ -174,7 +174,7 @@ def solve_maze():
     sleep(3)
     wall_node.toggle_walls(True)
     sleep(4)
-    motion_node.move_x(0.9)
+    motion_node.move_x(1.0)
     sleep(4)
     wall_node.toggle_walls(False)
     sleep(4)

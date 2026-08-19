@@ -15,7 +15,7 @@ class MoveXActionServer(Node):
 
     def __init__(self):
         super().__init__('move_x_action_server')
-
+        self.last_odm_time = self.get_clock().now()
         # Use ReentrantCallbackGroup to allow concurrent execution of callbacks and actions
         self.callback_group = ReentrantCallbackGroup()
 
@@ -78,6 +78,7 @@ class MoveXActionServer(Node):
 
     def odom_callback(self, msg):
         # This will now run freely in parallel thanks to MultiThreadedExecutor
+        self.last_odm_time = self.get_clock().now()
         self.current_x = msg.pose.pose.position.x
         self.current_y = msg.pose.pose.position.y
 
@@ -97,8 +98,35 @@ class MoveXActionServer(Node):
 
         distance_traveled = 0.0
 
+        start_time=self.get_clock().now()
+        # max time 
+        TimeOut_duration=15.0
         while rclpy.ok() and (distance_traveled < target_distance):
+            result = MoveX.Result()
             # Read continuously updated coordinates safely in parallel
+            current_time = self.get_clock().now()
+
+            #### EDGE CASE "MISSING /odm "
+            last_time_odm_Msg=(current_time - self.last_odm_time).nanoseconds/1e9 #convert to sec
+            if last_time_odm_Msg > 2.0 : # 2 sec pass 
+               self.get_logger().info('Missing /odom....')
+               self.execute_stop()
+               # change status of goal
+               goal_handle.abort()
+       
+               result.success = False
+               result.final_distance = distance_traveled
+               return result
+            
+            ### EDGE CASE "Time Out"
+            passed_time = (current_time - start_time).nanoseconds /1e9
+            if passed_time > TimeOut_duration :  ## per goal
+                self.get_logger().info('TIME OUT!...')
+                self.execute_stop()
+                goal_handle.abort()
+                result.success = False
+                result.final_distance = distance_traveled
+                return result
             distance_traveled = math.sqrt((self.current_x - start_x) ** 2 + (self.current_y - start_y) ** 2)
 
             feedback_msg.current_distance_traveled = distance_traveled

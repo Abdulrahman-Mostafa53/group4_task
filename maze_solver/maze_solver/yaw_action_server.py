@@ -130,8 +130,8 @@ class MoveYawActionServer(Node):
         self.current_direction = direction
         self.start_yaw_goal = self.current_yaw
 
-        target_angle_rad = (math.pi / 2.0)
-        base_speed = 0.1
+        target_angle_rad = (math.pi / 2.0)-0.25
+        base_speed = 2
         
         if direction == 'left':
             angular_speed = base_speed
